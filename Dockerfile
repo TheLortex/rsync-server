@@ -15,7 +15,8 @@ RUN echo 'MaxSessions 1000' >> /etc/ssh/sshd_config
 RUN echo 'MaxStartups 200' >> /etc/ssh/sshd_config
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 RUN echo "export VISIBLE=now" >> /etc/profile
-
+RUN git config --global user.email "docker@ci"
+RUN git config --global user.name "CI"
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 744 /entrypoint.sh
 
