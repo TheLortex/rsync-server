@@ -11,6 +11,8 @@ RUN apt-get update && \
 
 RUN mkdir /var/run/sshd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN echo 'MaxSessions 1000' >> /etc/ssh/sshd_config
+RUN echo 'MaxStartups 200' >> /etc/ssh/sshd_config
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 RUN echo "export VISIBLE=now" >> /etc/profile
 
